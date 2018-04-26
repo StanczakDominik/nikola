@@ -300,7 +300,14 @@ date
 
 tags
     Comma-separated tags of the post. Some tags have special meaning, including
-    ``draft``, ``private``, ``mathjax``
+    ``draft``, ``private``, ``mathjax``. These special meanings can be disabled
+    with the ``USE_TAG_METADATA`` configuration setting.
+
+status
+    Can be set to ``published`` (default), ``draft``, or ``private``.
+
+has_math
+    If set to ``True``, ...
 
 category
     Like tags, except each post can have only one, and they usually have
@@ -809,11 +816,15 @@ Or you can completely customize the link using the ``READ_MORE_LINK`` option.
 Drafts
 ~~~~~~
 
-If you add a "draft" tag to a post, then it will not be shown in indexes and feeds.
-It *will* be compiled, and if you deploy it it *will* be made available, so use
-with care. If you wish your drafts to be not available in your deployed site, you
-can set ``DEPLOY_DRAFTS = False`` in your configuration. This will not work if
-lazily include ``nikola build`` in your ``DEPLOY_COMMANDS``.
+If you set the ``status`` metadata field of a post to ``draft``, it will not be shown
+in indexes and feeds. It *will* be compiled, and if you deploy it it *will* be made
+available, so use with care. If you wish your drafts to be not available in your
+deployed site, you can set ``DEPLOY_DRAFTS = False`` in your configuration. This will
+not work if lazily include ``nikola build`` in your ``DEPLOY_COMMANDS``.
+
+If not disabled with the ``USE_TAG_METADATA`` configuration setting, you can also add
+a ``draft`` tag to your post to achieve the same result as setting ``status`` to
+``draft``. This mechanism was the only one available in older versions of Nikola.
 
 Also if a post has a date in the future, it will not be shown in indexes until
 you rebuild after that date. This behavior can be disabled by setting
@@ -826,9 +837,13 @@ Generally, you want FUTURE_IS_NOW and DEPLOY_FUTURE to be the same value.
 Private Posts
 ~~~~~~~~~~~~~
 
-If you add a "private" tag to a post, then it will not be shown in indexes and feeds.
-It *will* be compiled, and if you deploy it it *will* be made available, so it will
-not generate 404s for people who had linked to it.
+If you set the ``status`` metadata field of a post to ``private``, it will not be shown
+in indexes and feeds. It *will* be compiled, and if you deploy it it *will* be made
+available, so it will not generate 404s for people who had linked to it.
+
+If not disabled with the ``USE_TAG_METADATA`` configuration setting, you can also add
+a ``private`` tag to your post to achieve the same result as setting ``status`` to
+``private``. This mechanism was the only one available in older versions of Nikola.
 
 Queuing Posts
 ~~~~~~~~~~~~~
