@@ -268,8 +268,8 @@ class Post(object):
                     is_private = False
                     is_draft = True
                 else:
-                    LOGGER.warn('The post "{0}" has the unknown status "{1}". ' +
-                                'Valid values are "published", "private" and "draft".'.format(self.source_path, status))
+                    LOGGER.warn(('The post "{0}" has the unknown status "{1}". ' +
+                                 'Valid values are "published", "private" and "draft".').format(self.source_path, status))
 
             if self.config['WARN_ABOUT_TAG_METADATA']:
                 if 'draft' in [_.lower() for _ in self._tags[lang]]:
