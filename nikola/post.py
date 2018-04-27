@@ -343,8 +343,11 @@ class Post(object):
 
     @property
     def is_mathjax(self):
-        """Return True if this post has has_math set to True, hast set the
-        mathjax tag in the current language or is a python notebook."""
+        """Return True if this post has has_math set to True or is a python notebook.
+
+        Alternatively, it will return True if it has set the mathjax tag in the
+        current language and the USE_TAG_METADATA config setting is True.
+        """
         if self.compiler.name == 'ipynb':
             return True
         lang = nikola.utils.LocaleBorg().current_lang
